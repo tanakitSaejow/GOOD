@@ -1,0 +1,12 @@
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\bin\Debug\Database.dll.config
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\bin\Debug\Database.dll
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\bin\Debug\Database.pdb
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\bin\Debug\EntityFramework.dll
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\bin\Debug\EntityFramework.xml
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\obj\Debug\Database.csproj.AssemblyReference.cache
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\obj\Debug\Database.csproj.CoreCompileInputs.cache
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\obj\Debug\Database.csproj.CopyComplete
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\obj\Debug\Database.dll
+C:\Users\tanak\Desktop\Work\Train\C#\GOOD\Database\obj\Debug\Database.pdb

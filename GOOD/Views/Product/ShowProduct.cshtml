@@ -1,0 +1,262 @@
+﻿@using Database.DataBase
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var Product = (List<tbcoffeeboy>)ViewBag.Product;
+}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<style>
+    .table-box {
+        height: auto;
+        overflow-y: scroll;
+    }
+
+    td {
+        width: 310px;
+    }
+</style>
+<div class="container">
+    <table class="table table-box" style="margin:10px;">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalNewProduct">NewProduct</button></th>
+            </tr>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NAME</th>
+                <th scope="col">PRICE</th>
+                <th scope="col">#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var it in Product)
+            {
+                <tr>
+                    <th scope="row" id="Product">@it.Product_ID</th>
+                    <td>@it.Product_Name</td>
+                    <td>@it.Product_Price</td>
+                    <td>
+                        <button type="button" class="btn btn-default btn-lg-5 btn-info" data-toggle="modal" data-target="#exampleModalDetail" onclick="detail(@it.Product_ID)">Detail</button>
+                        <button type="button" class="btn btn-default btn-lg-5 btn-warning" data-toggle="modal" data-target="#exampleModalEdit" id="Edit" onclick="edit(@it.Product_ID)">Edit</button>
+                        <button type="button" class="btn btn-default btn-lg-5 btn-danger" data-toggle="modal" data-target="#exampleModalDelete" id="Delete" onclick="del(@it.Product_ID)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="exampleModalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Detail</h3>
+            </div>
+            <div class="modal-body" id="CreateDetail">
+                <div id="Detail">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="ResetDetail">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Edit</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Name :</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="NameEdit" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Price :</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="PriceEdit" placeholder="Price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Datail :</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="DatailEdit" name="DatailProduct" placeholder="Datail">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="EditProduct">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalNewProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">NewProduct</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Name :</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="NameNewProduct" name="NameNewProduct" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Price :</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="PriceNewProduct" name="PriceNewProduct" placeholder="Price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Datail :</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="DatailProduct" name="DatailProduct" placeholder="Datail">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="NewProduct">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#NewProduct").click(function () {
+        var Product_Name = $("#NameNewProduct").val();
+        var Product_Price = $("#PriceNewProduct").val();
+        var Product_Detail = $("#DatailProduct").val();
+        var obj = {
+            Product_Name,
+            Product_Price,
+            Product_Detail
+        }
+        console.log(obj);
+        $.ajax({
+            type: "POST",
+            url: "/Product/Insert",
+            data: obj,
+            dataType: "json",
+            success: function (res) {
+                Swal.fire('Saved!', '', 'success')
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+            },
+            error: function () {
+                alert("GGEZ NO NEW PRODUCT");
+            }
+        });
+    });
+
+    function del(id) {
+        var Product_ID = Number(id);
+        var obj = {
+            Product_ID
+        }
+        console.log(obj)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Product/Del",
+                    data: obj,
+                    dataType: "json",
+                    success: function (res) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000);
+                    },
+                    error: function () {
+                        alert("GGEZ BOBO NO ID");
+                    }
+                });
+            }
+        })
+    }
+    function edit(id) {
+        var Product_ID = Number(id);
+
+        $("#EditProduct").click(function () {
+            var Product_Name = $("#NameEdit").val();
+            var Product_Price = $("#PriceEdit").val();
+            var Product_Detail = $("#DatailEdit").val();
+            var obj = {
+                Product_ID,
+                Product_Name,
+                Product_Price,
+                Product_Detail
+            }
+            console.log(obj);
+            $.ajax({
+                type: "POST",
+                url: "/Product/Edit",
+                data: obj,
+                dataType: "json",
+                success: function (res) {
+                    Swal.fire('Saved!', '', 'success')
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                },
+                error: function () {
+                    alert("GGEZ NOOB NO DATA EDIT");
+                }
+            });
+        });
+    }
+    function detail(id) {
+        var Product_ID = Number(id);
+        var obj = {
+            Product_ID,
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Product/Detail",
+            data: obj,
+            dataType: "json",
+            success: function (res) {
+                console.log(res)
+                $("#Detail").append(`<div>Name : ${res.Product_Name}<br>Price : ${res.Product_Price} Baht<br>Detail : ${res.Product_Detail}</div>`)
+                $("#ResetDetail").click(function () {
+                    $("#Detail").remove()
+                    $("#CreateDetail").append("<div id='Detail'></div>")
+                    console.clear();
+                })
+            },
+            error: function () {
+                alert("GGEZ LA NO DATA DETIL");
+            }
+        });
+    }
+</script>

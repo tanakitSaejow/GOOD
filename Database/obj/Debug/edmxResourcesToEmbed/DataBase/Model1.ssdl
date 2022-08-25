@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_productModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbcoffeeboy">
+    <Key>
+      <PropertyRef Name="Product_ID" />
+    </Key>
+    <Property Name="Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Name" Type="nvarchar(max)" />
+    <Property Name="Product_Price" Type="nvarchar" MaxLength="50" />
+    <Property Name="Product_Detail" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tbMember">
+    <Key>
+      <PropertyRef Name="User_ID" />
+    </Key>
+    <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_Name" Type="nvarchar(max)" />
+    <Property Name="User_Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Email" Type="nvarchar(max)" />
+    <Property Name="User_Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Gender" Type="nchar" MaxLength="10" />
+    <Property Name="User_isAdmin" Type="bit" />
+  </EntityType>
+  <EntityContainer Name="db_productModelStoreContainer">
+    <EntitySet Name="tbcoffeeboy" EntityType="Self.tbcoffeeboy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbMember" EntityType="Self.tbMember" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
